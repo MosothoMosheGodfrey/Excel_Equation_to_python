@@ -85,7 +85,6 @@ def convert_to_python_syntax(formulas):
         pivot_syntax = ', '.join([f'"{field}"' for field in pivot_fields])
         python_syntax.append(f'pivot_data({pivot_syntax})')
     return python_syntax
-
 # Example usage
 file_path = 'example.xlsx'
 pivot_formulas = extract_pivot_formulas(file_path)
@@ -93,8 +92,7 @@ python_syntax = convert_to_python_syntax(pivot_formulas)
 # Print extracted PivotTable formulas converted to Python syntax
 for idx, formula in enumerate(python_syntax, start=1):
     print(f"Formula {idx}: {formula}")
-In this code:
-
+ 
 """ The extract_pivot_formulas function iterates through each cell in each sheet of the Excel file and 
 checks if the cell value contains the 'GETPIVOTDATA' function. If it does, the formula is added to the 
 list of PivotTable formulas. The convert_to_python_syntax function converts the extracted PivotTable 
