@@ -1,0 +1,29 @@
+import openpyxl
+from openpyxl.utils import get_column_letter
+
+def excel_to_python_equations(file_path):
+    wb = openpyxl.load_workbook(file_path)
+    sheet = wb.active
+
+    equations = []
+
+    for row in sheet.iter_rows():
+        for cell in row:
+            if cell.data_type == 'f' and cell.value:  # Check if the cell contains a formula
+                cell_address = cell.coordinate
+                formula = cell.value
+
+                # Convert Excel column letters to Python variables (e.g., A --> 0, B --> 1, etc.)
+                for col in range(sheet.min_column, sheet.max_column + 1):
+                    formula = formula.replace(get_column_letter(col), f'x[{col - 1}]')
+
+                equations.append((cell_address, formula))
+
+    return equations
+
+file_path = 'Moshe_test_data.xlsx'
+equations = excel_to_python_equations(file_path)
+
+# Print extracted equations
+for cell_address, formula in equations:
+    print(f"Cell {cell_address}: {formula}")
