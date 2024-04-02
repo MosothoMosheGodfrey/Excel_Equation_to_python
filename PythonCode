@@ -62,6 +62,47 @@ converting column letters to indices.
 
 
 
+# ============================== -OR-
+
+import openpyxl
+import re
+def extract_pivot_formulas(file_path):
+    pivot_formulas = []
+    wb = openpyxl.load_workbook(file_path, data_only=True)
+    for sheet_name in wb.sheetnames:
+        sheet = wb[sheet_name]
+        for row in sheet.iter_rows(values_only=True):
+            for cell_value in row:
+                if isinstance(cell_value, str) and 'GETPIVOTDATA' in cell_value:
+                    pivot_formulas.append(cell_value)
+    return pivot_formulas
+
+def convert_to_python_syntax(formulas):
+    python_syntax = []
+    for formula in formulas:
+        # Remove GETPIVOTDATA function and convert references to Python syntax
+        pivot_fields = re.findall(r'\[([^]]+)\]', formula)
+        pivot_syntax = ', '.join([f'"{field}"' for field in pivot_fields])
+        python_syntax.append(f'pivot_data({pivot_syntax})')
+    return python_syntax
+
+# Example usage
+file_path = 'example.xlsx'
+pivot_formulas = extract_pivot_formulas(file_path)
+python_syntax = convert_to_python_syntax(pivot_formulas)
+# Print extracted PivotTable formulas converted to Python syntax
+for idx, formula in enumerate(python_syntax, start=1):
+    print(f"Formula {idx}: {formula}")
+In this code:
+
+""" The extract_pivot_formulas function iterates through each cell in each sheet of the Excel file and 
+checks if the cell value contains the 'GETPIVOTDATA' function. If it does, the formula is added to the 
+list of PivotTable formulas. The convert_to_python_syntax function converts the extracted PivotTable 
+formulas to Python syntax. It uses regular expressions to extract the pivot fields from the formulas 
+and converts them to strings separated by commas. Finally, an example usage demonstrates how to use 
+these functions to extract PivotTable formulas from an Excel file and convert them to Python syntax.
+""" 
+
 
 
 
