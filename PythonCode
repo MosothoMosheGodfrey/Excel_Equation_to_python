@@ -27,3 +27,42 @@ equations = excel_to_python_equations(file_path)
 # Print extracted equations
 for cell_address, formula in equations:
     print(f"Cell {cell_address}: {formula}")
+
+""" This script will extract formulas from an Excel file and convert Excel column letters to Python variables. 
+You might need to handle different types of formulas and functions based on your specific use case. Additionally, 
+consider handling special Excel functions and syntax that may not directly translate to Python.
+"""
+
+
+
+# ============================== -OR-
+
+import openpyxl
+def excel_to_python_equations(file_path):
+    equations = []
+    wb = openpyxl.load_workbook(file_path)
+    sheet = wb.active
+    for row in sheet.iter_rows(values_only=True):
+        for cell_value in row:
+            if isinstance(cell_value, str) and cell_value.startswith('='):
+                equations.append(cell_value)
+    return equations
+# Example usage
+file_path = 'example.xlsx'
+equations = excel_to_python_equations(file_path)
+# Print extracted equations
+for idx, equation in enumerate(equations, start=1):
+    print(f"Equation {idx}: {equation}")
+
+""" This version simplifies the code by directly checking if the cell value starts with an equal sign ('='),
+indicating that it contains a formula. It also uses the values_only=True parameter in iter_rows() to directly
+retrieve the cell values as opposed to cell objects. This approach avoids unnecessary operations like 
+converting column letters to indices.
+"""
+
+
+
+
+
+
+
