@@ -1,0 +1,85 @@
+\documentclass{article}
+\usepackage{hyperref}
+
+\title{Sharing Power BI Report via HTML Embedding}
+\author{}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section{Create the HTML Envelope}
+
+\begin{enumerate}
+    \item \textbf{Open a Text Editor}: Use a text editor like Notepad, Visual Studio Code, or any other HTML editor.
+    
+    \item \textbf{Write HTML Code}: Write the HTML code to embed the Power BI report using an \texttt{<iframe>} tag. Here's a basic example:
+    
+    \begin{verbatim}
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Power BI Report</title>
+    </head>
+    <body>
+        <h1>My Power BI Report</h1>
+        <div>
+            <iframe width="800" height="600" 
+            src="https://app.powerbi.com/view?r=<report_id>" 
+            frameborder="0" allowFullScreen="true"></iframe>
+        </div>
+    </body>
+    </html>
+    \end{verbatim}
+    
+    Replace \texttt{<report\_id>} with the actual ID of your Power BI report.
+    
+    \item \textbf{Save the File}: Save the file with a .html extension, for example, \texttt{powerbi\_report.html}.
+\end{enumerate}
+
+\section{Host the HTML File}
+
+\begin{enumerate}
+    \item \textbf{Local Hosting (Optional)}: For testing purposes, you can host the HTML file on a local server like XAMPP, WAMP, or any other local web server.
+    
+    \item \textbf{Public Hosting}: If you want your colleagues to access the report over the internet, host the HTML file on a public web server. You can use services like GitHub Pages, Google Drive, or any other web hosting provider.
+\end{enumerate}
+
+\section{Obtain the URL}
+
+\begin{enumerate}
+    \item \textbf{Local Hosting}: If hosting locally, the URL will be something like \texttt{http://localhost/powerbi\_report.html}.
+    
+    \item \textbf{Public Hosting}: For public hosting, the URL will depend on the hosting provider. For example, if hosted on GitHub Pages, the URL will be \texttt{https://<username>.github.io/powerbi\_report.html}.
+    
+    \item \textbf{Create a Static URL (Optional)}: If you want a static URL, consider using URL shortening services like Bitly or TinyURL. These services provide short, easy-to-share URLs that redirect to your hosted HTML file.
+\end{enumerate}
+
+\section{Share the URL}
+
+\begin{enumerate}
+    \item \textbf{Share via Email or Messaging}: Send the URL of the HTML file to your colleagues via email, messaging platforms, or any other communication channels.
+    
+    \item \textbf{Include Instructions}: Provide clear instructions on how to access the report and any necessary login credentials or permissions required to view the report.
+\end{enumerate}
+
+\section{Pros and Cons}
+
+\textbf{Pros:}
+\begin{itemize}
+    \item Allows colleagues to view and interact with the Power BI report without direct access to the Power BI service.
+    \item Can be easily shared via URL through various communication channels.
+    \item Provides flexibility in hosting options, including local and public hosting.
+\end{itemize}
+
+\textbf{Cons:}
+\begin{itemize}
+    \item Requires hosting the HTML file on a web server, which may involve additional setup and maintenance.
+    \item Colleagues may need appropriate permissions to access the Power BI report.
+    \item Depending on the hosting method, there may be limitations on scalability and reliability.
+\end{itemize}
+
+\end{document}
